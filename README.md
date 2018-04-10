@@ -1,4 +1,4 @@
-# Gerenciamento-de-Agenda-Comunitaria
+﻿# Gerenciamento-de-Agenda-Comunitaria
 
 Divisão das tarefas
 
@@ -15,4 +15,4 @@ Listar -
 
 FrontEnd - Renata
 
-Banco de Dados - 
+Banco de Dados - Renata
