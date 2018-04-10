@@ -37,4 +37,19 @@ public class Conexao {
         }
     }
     
+    public void inserirNovaAtividade(String titulo, String nome, Date data){
+        String sql = "INSERT INTO evento (nomeevento, dataevento,  idusuario) VALUES (?,?,?)";
+        try {
+           PreparedStatement stm = con.prepareStatement(sql);
+           stm.setString(1, titulo);
+           stm.setString(2, nome);
+           stm.setDate(3, data);
+           stm.executeUpdate(sql);
+           con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao inserirNovaAtividade na Conexao.");
+            e.printStackTrace();
+        }
+    }
+    
 }
