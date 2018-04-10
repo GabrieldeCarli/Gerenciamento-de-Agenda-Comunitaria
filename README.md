@@ -5,13 +5,13 @@ Divisão das tarefas
 
 Sistema de Controle de Agenda Comunitaria
 
-Login - 
+Login - Gabriel
 
-Inserir - 
+Inserir - Daniel
 
-Buscar - 
+Buscar - Luiz 
 
-Listar - 
+Listar - Luiz
 
 FrontEnd - Renata
 
