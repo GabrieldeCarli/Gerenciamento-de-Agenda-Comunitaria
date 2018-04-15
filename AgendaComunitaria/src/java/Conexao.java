@@ -1,4 +1,4 @@
-package Conexao;
+
 
 import java.sql.*;
 
@@ -12,7 +12,7 @@ public class Conexao {
     private String senha;
     private Connection con;
     
-    Conexao(){
+    public Conexao(){
         url = "jdbc:postgresql://localhost:5432/NomBanco";
         usuario = "postgres";
         senha = "senha";
@@ -36,5 +36,15 @@ public class Conexao {
             return null;
         }
     }
-    
+    public void inserirNovaAtividade(String sql){
+        
+        try {
+           Statement stm = con.prepareStatement(sql);
+           stm.executeUpdate(sql);
+           con.close();
+        } catch (Exception e) {
+            System.err.println("Erro ao inserirNovaAtividade na Conexao.");
+            e.printStackTrace();
+        }
+    }
 }
