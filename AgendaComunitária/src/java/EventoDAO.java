@@ -67,4 +67,24 @@ public class EventoDAO {
             throw new RuntimeException(e);
         }      
     }
+    public List<Evento> buscaEvento(Evento evento){
+        String sql = "select * from evento WHERE name_event LIKE ?";
+        try {
+            List<Evento> eventos = new ArrayList();
+            PreparedStatement ps = (PreparedStatement) this.connection.prepareStatement(sql);
+            ps.setString(1, "%"+evento.getNome()+"%");
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                Evento event = new Evento();                
+                event.setNome(rs.getString("name_event"));
+                event.setUserId(rs.getInt("id_user"));
+                eventos.add(event);
+            }
+            ps.close();
+            return eventos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }      
+    }
 }
