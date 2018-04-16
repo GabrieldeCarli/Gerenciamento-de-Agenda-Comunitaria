@@ -14,8 +14,9 @@ import java.sql.SQLException;
  * @author luiz-
  */
 public class ConnectionFactory {
-    public Connection getConnection() {
+    public Connection getConnection() throws ClassNotFoundException {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection(
                     "jdbc:mysql://localhost/agendacomunitaria", "root", "");
         } catch (SQLException e) {

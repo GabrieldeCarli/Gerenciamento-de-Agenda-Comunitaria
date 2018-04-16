@@ -21,13 +21,13 @@ public class EventoDAO {
     private Connection connection;
     
     
-    public EventoDAO(){
+    public EventoDAO() throws ClassNotFoundException{
         this.connection = new ConnectionFactory().getConnection();
     }
     
     public void adicionaEvento(Evento evento){
-        String sql = "insert into evento " + "(name_event, date, id_user)" + " values (?, ?, ?)";
-        
+        String sql = "insert into evento (name_event, date, id_user)" 
+                + " values (?, ?, ?)";
         
         try {
             PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
@@ -38,10 +38,9 @@ public class EventoDAO {
             // setando a data
             
             java.sql.Date dataParaGravar = new java.sql.Date(
-            Calendar.getInstance().getTimeInMillis());
+                                Calendar.getInstance().getTimeInMillis());
             ps.setDate(2, dataParaGravar);
-            
-            ps.execute();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e){
             throw new RuntimeException (e);

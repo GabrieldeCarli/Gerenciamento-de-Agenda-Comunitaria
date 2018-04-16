@@ -18,6 +18,15 @@ public class Evento {
     public Calendar data;
     public int userId;
 
+    public Evento() {
+    }
+
+    public Evento(String nome, Calendar data, int userId) {
+        this.nome = nome;
+        this.data = data;
+        this.userId = userId;
+    }
+    
     public Long getId() {
         return id;
     }

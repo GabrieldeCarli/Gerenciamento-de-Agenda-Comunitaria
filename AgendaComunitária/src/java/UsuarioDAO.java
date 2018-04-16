@@ -25,18 +25,18 @@ public class UsuarioDAO {
     }
     
     public void adicionaUsuario(Usuario usuario){
-        String sql = "insert into usuario " + "(name_user, password)" + " values (?, ?)";
+        String sql = "INSERT INTO usuario (name_user, password)" 
+                + " VALUES (?, ?)";
         
         try {
             // prepared statement para inserção
             PreparedStatement stmt = (PreparedStatement) connection.prepareStatement(sql);
 
             // seta os valores
-
             stmt.setString(1,usuario.getUserName());
             stmt.setString(2,usuario.getPassword());
 
-            // executa
+            // executa a query
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -52,10 +52,8 @@ public class UsuarioDAO {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()){
-                Usuario user = new Usuario();
-                
-                user.setUserName(rs.getString("name_user"));
-                
+                Usuario user = new Usuario();                
+                user.setUserName(rs.getString("name_user"));                
                 contatos.add(user);
             }
             rs.close();
