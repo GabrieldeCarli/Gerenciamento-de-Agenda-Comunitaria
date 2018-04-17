@@ -1,8 +1,10 @@
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -33,13 +35,9 @@ public class EventoDAO {
             PreparedStatement ps = (PreparedStatement) connection.prepareStatement(sql);
             
             ps.setString(1, evento.getNome());
+            ps.setTimestamp(2, new java.sql.Timestamp (evento.getData().getTime()));
             ps.setLong(3, evento.getUserId());
             
-            // setando a data
-            
-            java.sql.Date dataParaGravar = new java.sql.Date(
-                                Calendar.getInstance().getTimeInMillis());
-            ps.setDate(2, dataParaGravar);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e){
@@ -59,6 +57,7 @@ public class EventoDAO {
                 
                 event.setNome(rs.getString("name_event"));
                 event.setUserId(rs.getInt("id_user"));
+                event.setData(rs.getDate("date"));
                 eventos.add(event);
             }
             ps.close();
@@ -78,6 +77,7 @@ public class EventoDAO {
             while (rs.next()){
                 Evento event = new Evento();                
                 event.setNome(rs.getString("name_event"));
+                event.setData(rs.getDate("date"));
                 event.setUserId(rs.getInt("id_user"));
                 eventos.add(event);
             }
