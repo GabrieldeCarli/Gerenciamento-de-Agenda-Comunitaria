@@ -1,6 +1,7 @@
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,13 +16,13 @@ import java.util.Calendar;
 public class Evento {
     public Long id;
     public String nome;
-    public Calendar data;
+    public Date data;
     public int userId;
 
     public Evento() {
     }
 
-    public Evento(String nome, Calendar data, int userId) {
+    public Evento(String nome, Date data, int userId) {
         this.nome = nome;
         this.data = data;
         this.userId = userId;
@@ -43,11 +44,11 @@ public class Evento {
         this.nome = nome;
     }
 
-    public Calendar getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Calendar data) {
+    public void setData(Date data) {
         this.data = data;
     }
 

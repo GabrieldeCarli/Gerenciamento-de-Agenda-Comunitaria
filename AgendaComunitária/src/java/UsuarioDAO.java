@@ -20,7 +20,7 @@ import java.util.List;
 public class UsuarioDAO {
     private Connection connection;
     
-    public UsuarioDAO(){
+    public UsuarioDAO() throws ClassNotFoundException{
         this.connection = new ConnectionFactory().getConnection();
     }
     
