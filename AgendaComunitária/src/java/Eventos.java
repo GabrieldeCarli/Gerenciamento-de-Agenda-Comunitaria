@@ -96,21 +96,7 @@ public class Eventos extends HttpServlet {
             response.sendRedirect("Eventos?busca=" + true + "&nomeEvento=" + nomeEventoParaBuscar);
         } else if (nomeBusca.isEmpty()) {
             response.sendRedirect("Eventos?busca=" + false);
-        } else {
-            String nomeEvento = request.getParameter("nomeEvento");
-            int idUsuario = Integer.parseInt(request.getParameter("IdUsuario"));
-            String dataForm = request.getParameter("data");
-            Date data = castDate(dataForm);
-
-            Evento evento = new Evento(nomeEvento, data, idUsuario);
-            try {
-                EventoDAO eventoDao = new EventoDAO();
-                eventoDao.adicionaEvento(evento);
-                response.sendRedirect("Eventos");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(InsertServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        } 
     }
 
     private java.util.Date castDate(String data) {
