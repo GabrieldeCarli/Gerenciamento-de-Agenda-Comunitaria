@@ -64,6 +64,7 @@ public class Logar extends HttpServlet {
         String name_user = request.getParameter("name_user");
         String senha = request.getParameter("senha");
         List<Usuario> user = new ArrayList();
+        user = null;
         
         try {
             
@@ -74,7 +75,7 @@ public class Logar extends HttpServlet {
                 out.println("<html><body>Usuário ou senha inválida</body></html>");
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("usuario.logado", usuario);
+                session.setAttribute("user.logado", usuario);
                 out.println("<html><body>Usuário logado: " + name_user + "</body></html>");
 
                 response.sendRedirect("/Eventos");
