@@ -64,25 +64,25 @@ public class UsuarioDAO {
         }
     }
 
-    public List<Usuario> validar(String name_user, String password) {
-        String sql = "select name_user, password from usuario WHERE name_user LIKE ? AND password ?";
+    public boolean validar(String name_user, String password) {
+        String sql = "select name_user, password from usuario WHERE name_user LIKE ? AND password LIKE ?";
 
         try {
-            List<Usuario> user = new ArrayList();
+
             java.sql.PreparedStatement ps = (java.sql.PreparedStatement) this.connection.prepareStatement(sql);
             ps.setString(1, name_user);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setUserName(rs.getString("name_user"));
-                usuario.setUserName(rs.getString("password"));
-                usuario.setId(rs.getLong("id_user"));
-                user.add(usuario);
+            if (rs.next()) {
+                ps.close();
+                return true;
+            }else{
+                ps.close();
+                return false;
             }
-            ps.close();
-            return user;
+            
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

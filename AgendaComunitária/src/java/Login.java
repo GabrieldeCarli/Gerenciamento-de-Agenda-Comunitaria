@@ -21,8 +21,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author gabri
  */
-@WebServlet(urlPatterns = {"/Logar"})
-public class Logar extends HttpServlet {
+@WebServlet(urlPatterns = {"/Login"})
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,12 +41,12 @@ public class Logar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Veja os eventos</title>");
+            out.println("<title>Faça Login</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<fieldset>");
             out.println("<legend>LOGAR</legend>");
-            out.println("<form action=\"logar\" method=\"post\">");
+            out.println("<form action=\"Login\" method=\"post\">");
             out.println("Nome: <input type=\"text\" name=\"name_user\" /><br />");
             out.println("Senha: <input type=\"password\" name=\"senha\" /><br />");
             out.println("<input type=\"submit\" value=\"Login\" />");
@@ -57,31 +57,30 @@ public class Logar extends HttpServlet {
         }
     }
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
-
         String name_user = request.getParameter("name_user");
         String senha = request.getParameter("senha");
         List<Usuario> user = new ArrayList();
         user = null;
         
         try {
-            
+
             UsuarioDAO usuario = new UsuarioDAO();
-            user = usuario.validar(name_user, senha);
+            boolean situacao = usuario.validar(name_user, senha);
+                 
             
-            if (user == null) {
+            if (situacao == false) {
                 out.println("<html><body>Usuário ou senha inválida</body></html>");
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("user.logado", usuario);
                 out.println("<html><body>Usuário logado: " + name_user + "</body></html>");
 
-                response.sendRedirect("/Eventos");
+                response.sendRedirect("Eventos");
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Logar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,7 +107,6 @@ public class Logar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
 
     /**
      * Returns a short description of the servlet.
